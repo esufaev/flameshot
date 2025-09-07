@@ -189,6 +189,8 @@ void saveToClipboard(const QPixmap& capture)
 {
     // If we are able to properly save the file, save the file and copy to
     // clipboard.
+    
+
     if ((ConfigHandler().saveAfterCopy()) &&
         (!ConfigHandler().savePath().isEmpty())) {
         saveToFilesystem(capture,

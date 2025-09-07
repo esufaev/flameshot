@@ -9,8 +9,9 @@ set(GIT_API_URL "https://api.github.com/repos/flameshot-org/flameshot/releases/l
 project(
         flameshot
         VERSION ${FLAMESHOT_VERSION}
-        LANGUAGES CXX)
+        LANGUAGES C CXX)
 set(PROJECT_NAME_CAPITALIZED "Flameshot")
+enable_language(C)
 
 include(FetchContent)
 #Must be set before fetching external content!

@@ -1349,6 +1349,19 @@ Please solve them manually in the configuration file.</source>
     </message>
 </context>
 <context>
+    <name>TesseractTool</name>
+    <message>
+        <location filename="../../src/tools/tesseract/tesseract.cpp" line="18"/>
+        <source>Pencil</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/tools/tesseract/tesseract.cpp" line="28"/>
+        <source>Set the Tesseract as the paint tool</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>PinTool</name>
     <message>
         <location filename="../../src/tools/pin/pintool.cpp" line="25"/>

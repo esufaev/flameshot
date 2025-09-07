@@ -211,6 +211,30 @@ target_include_directories(
          $<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/>
          )
 
+
+target_sources(flameshot PRIVATE
+  ${CMAKE_CURRENT_SOURCE_DIR}/tools/tesseract/tesseract.h
+  ${CMAKE_CURRENT_SOURCE_DIR}/tools/tesseract/tesseract.cpp
+)
+
+include(FetchContent)
+
+FetchContent_Declare(
+  tesseract
+  GIT_REPOSITORY https://github.com/tesseract-ocr/tesseract.git
+  GIT_TAG 5.5.1
+  GIT_SHALLOW TRUE
+)
+FetchContent_MakeAvailable(tesseract)
+
+FetchContent_Declare(
+  leptonica
+  GIT_REPOSITORY https://github.com/DanBloomberg/leptonica.git
+  GIT_TAG master
+  GIT_SHALLOW TRUE
+)
+FetchContent_MakeAvailable(leptonica)
+
 target_link_libraries(
         flameshot
         project_warnings
@@ -219,6 +243,8 @@ target_link_libraries(
         Qt${QT_VERSION_MAJOR}::Network
         Qt${QT_VERSION_MAJOR}::Widgets
         QtColorWidgets
+        libtesseract
+        leptonica
 )
 if (UNIX AND NOT APPLE)
 target_link_libraries(
@@ -531,3 +557,5 @@ if (APPLE)
 
 
 endif ()
+
+
