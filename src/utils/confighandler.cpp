@@ -137,6 +137,7 @@ static QMap<class QString, QSharedPointer<ValueHandler>>
     OPTION("jpegQuality"                 , BoundedInt        ( 0,100,75      )),
     OPTION("reverseArrow"                ,Bool               ( false         )),
     OPTION("insecurePixelate"            ,Bool               ( false         )),
+    OPTION("translatorRetryKeepSelection",Bool               ( false         )),
 };
 
 static QMap<QString, QSharedPointer<KeySequence>> recognizedShortcuts = {
@@ -163,6 +164,7 @@ static QMap<QString, QSharedPointer<KeySequence>> recognizedShortcuts = {
 #endif
     SHORTCUT("TYPE_PIXELATE"            ,   "B"                     ),
     SHORTCUT("TYPE_TESSERACT"           ,   "Meta+Shift+T"          ),
+    SHORTCUT("TYPE_TRANSLATOR"           ,   "Meta+Shift+K"          ),
     SHORTCUT("TYPE_INVERT"              ,   "I"                     ),
     SHORTCUT("TYPE_REDO"                ,   "Ctrl+Shift+Z"          ),
     SHORTCUT("TYPE_TEXT"                ,   "T"                     ),

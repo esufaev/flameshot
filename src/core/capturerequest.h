@@ -27,7 +27,8 @@ public:
         PIN = 16,
         UPLOAD = 32,
         ACCEPT_ON_SELECT = 64,
-        TESERACT = 128
+        TESERACT = 128,
+        TRANSLATOR = 256
     };
 
     CaptureRequest(CaptureMode mode,

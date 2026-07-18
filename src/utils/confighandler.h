@@ -140,6 +140,9 @@ public:
     CONFIG_GETTER_SETTER(showSelectionGeometryHideTime,
                          showSelectionGeometryHideTime,
                          int)
+    CONFIG_GETTER_SETTER(translatorRetryKeepSelection,
+                         setTranslatorRetryKeepSelection,
+                         bool)
 
     // SPECIAL CASES
     bool startupLaunch();

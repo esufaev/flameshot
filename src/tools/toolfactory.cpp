@@ -18,6 +18,7 @@
 #include "move/movetool.h"
 #include "pencil/penciltool.h"
 #include "tesseract/tesseract.h"
+#include "translator/translator.h"
 #include "pin/pintool.h"
 #include "pixelate/pixelatetool.h"
 #include "rectangle/rectangletool.h"
@@ -53,6 +54,7 @@ CaptureTool* ToolFactory::CreateTool(CaptureTool::Type t, QObject* parent)
         if_TYPE_return_TOOL(TYPE_SAVE, SaveTool);
         if_TYPE_return_TOOL(TYPE_EXIT, ExitTool);
         if_TYPE_return_TOOL(TYPE_TESSERACT, TesseractTool);
+        if_TYPE_return_TOOL(TYPE_TRANSLATOR, TranslatorTool);
 #ifdef ENABLE_IMGUR
         if_TYPE_return_TOOL(TYPE_IMAGEUPLOADER, ImgUploaderTool);
 #endif

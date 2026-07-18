@@ -215,25 +215,52 @@ target_include_directories(
 target_sources(flameshot PRIVATE
   ${CMAKE_CURRENT_SOURCE_DIR}/tools/tesseract/tesseract.h
   ${CMAKE_CURRENT_SOURCE_DIR}/tools/tesseract/tesseract.cpp
+  ${CMAKE_CURRENT_SOURCE_DIR}/tools/translator/translator.h
+  ${CMAKE_CURRENT_SOURCE_DIR}/tools/translator/translator.cpp
+  ${CMAKE_CURRENT_SOURCE_DIR}/tools/translator/translatorwindow.h
+  ${CMAKE_CURRENT_SOURCE_DIR}/tools/translator/translatorwindow.cpp
 )
 
 include(FetchContent)
 
-FetchContent_Declare(
-  tesseract
-  GIT_REPOSITORY https://github.com/tesseract-ocr/tesseract.git
-  GIT_TAG 5.5.1
-  GIT_SHALLOW TRUE
-)
-FetchContent_MakeAvailable(tesseract)
-
+# 1) Leptonica
 FetchContent_Declare(
   leptonica
   GIT_REPOSITORY https://github.com/DanBloomberg/leptonica.git
-  GIT_TAG master
-  GIT_SHALLOW TRUE
+  GIT_TAG        master
 )
 FetchContent_MakeAvailable(leptonica)
+
+# ЛОКАЛЬНЫЙ ПРЕФИКС УСТАНОВКИ
+set(LEPT_PREFIX ${CMAKE_BINARY_DIR}/lept-install)
+
+# Сконфигурируем и установим Leptonica до конфигурации Tesseract
+execute_process(COMMAND ${CMAKE_COMMAND}
+    -S ${leptonica_SOURCE_DIR}
+    -B ${leptonica_BINARY_DIR}
+    -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
+    -DCMAKE_INSTALL_PREFIX=${LEPT_PREFIX}
+)
+execute_process(COMMAND ${CMAKE_COMMAND}
+    --build ${leptonica_BINARY_DIR} --target install
+)
+
+# 2) Пусть CMake ищет пакеты в нашем префиксе
+list(PREPEND CMAKE_PREFIX_PATH ${LEPT_PREFIX})
+
+# 3) Теперь Tesseract найдёт Leptonica
+FetchContent_Declare(
+  tesseract
+  GIT_REPOSITORY https://github.com/tesseract-ocr/tesseract.git
+  GIT_TAG        main
+)
+FetchContent_MakeAvailable(tesseract)
+
+find_package(Tesseract REQUIRED CONFIG)
+
+
+
+
 
 target_link_libraries(
         flameshot
@@ -243,8 +270,8 @@ target_link_libraries(
         Qt${QT_VERSION_MAJOR}::Network
         Qt${QT_VERSION_MAJOR}::Widgets
         QtColorWidgets
-        libtesseract
         leptonica
+        Tesseract::libtesseract
 )
 if (UNIX AND NOT APPLE)
 target_link_libraries(

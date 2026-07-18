@@ -1409,6 +1409,9 @@ void CaptureWidget::handleToolSignal(CaptureTool::Request r)
                 drawToolsData(false);
             }
             break;
+        case CaptureTool::REQ_RESET_SELECTION:
+            cancel();
+            break;
         case CaptureTool::REQ_ADD_CHILD_WIDGET:
             if (!m_activeTool) {
                 break;

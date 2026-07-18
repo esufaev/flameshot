@@ -50,7 +50,8 @@ public:
         TYPE_INVERT = 22,
         TYPE_ACCEPT = 23,
         TYPE_CANCEL = 24,
-        TYPE_TESSERACT = 25
+        TYPE_TESSERACT = 25,
+        TYPE_TRANSLATOR = 26
     };
     Q_ENUM(Type);
 
@@ -78,7 +79,9 @@ public:
         // increase tool size for all tools
         REQ_INCREASE_TOOL_SIZE,
         // decrease tool size for all tools
-        REQ_DECREASE_TOOL_SIZE
+        REQ_DECREASE_TOOL_SIZE,
+        // Reset the selection (hide selection widget, clear active layer)
+        REQ_RESET_SELECTION
     };
 
     explicit CaptureTool(QObject* parent = nullptr)
